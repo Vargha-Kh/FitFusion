@@ -146,14 +146,14 @@ dummy_user_info = f"""
         Feedback Loop: Weekly weigh-ins and monthly measurements
         """
 
-if __name__ == "__main__":
-    """
-    Main function to run Langchain Model.
-    """
-    directory, model_type, vectorstore, file_formats = './diet', 'gpt-4o', 'weaviate', ['txt']
-    # Langchain model init
-    fitfusion_model = FitFusion(llm_model=model_type, vectorstore_name=vectorstore)
-    fitfusion_model.model_chain_init(directory, data_types=file_formats)
+# if __name__ == "__main__":
+#     """
+#     Main function to run Langchain Model.
+#     """
+#     directory, model_type, vectorstore, file_formats = './diet', 'gpt-4o', 'weaviate', ['txt']
+#     # Langchain model init
+#     fitfusion_model = FitFusion(llm_model=model_type, vectorstore_name=vectorstore)
+#     fitfusion_model.model_chain_init(directory, data_types=file_formats)
     # fitfusion_model.query_inferences(dummy_user_info)
     # while True:
     #     query = input("Please ask your question! ")

@@ -5,7 +5,7 @@ from pathlib import Path
 from main import FitFusion
 
 # Model init
-directory, model_type, vectorstore, file_formats = './diet', 'gpt-4o', 'weaviate', ['txt']
+directory, model_type, vectorstore, file_formats = './diet', 'gpt-4o-mini', 'chroma', ['txt']
 # Langchain model init
 fitfusion_model = FitFusion(llm_model=model_type, vectorstore_name=vectorstore)
 fitfusion_model.model_chain_init(directory, data_types=file_formats)
