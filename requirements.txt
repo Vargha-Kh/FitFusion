@@ -16,7 +16,7 @@ cohere
 langgraph
 nest-asyncio
 chromadb
-langchain-chroma>=0.1.2
+langchain-chroma
 
 # RabbitMQ connection
 aio-pika==9.4.3
