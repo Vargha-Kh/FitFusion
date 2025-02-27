@@ -15,6 +15,7 @@ weaviate_client==4.8.1
 cohere
 langgraph
 nest-asyncio
+chromadb
 
 # RabbitMQ connection
 aio-pika==9.4.3
