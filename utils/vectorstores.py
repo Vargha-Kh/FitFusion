@@ -7,7 +7,7 @@ from langchain_community.document_loaders import TextLoader, DirectoryLoader, Py
 from langchain_community.document_loaders.recursive_url_loader import RecursiveUrlLoader
 from langchain_community.document_loaders.generic import GenericLoader
 from langchain_community.document_loaders.parsers import LanguageParser
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_text_splitters import Language, RecursiveCharacterTextSplitter
 import weaviate
 from langchain_weaviate.vectorstores import WeaviateVectorStore
@@ -85,12 +85,11 @@ def documents_loader(data_path, data_types, chunk_size):
 def chroma_embeddings(data_path, data_types, embedding_function, index_name, chunk_size, create_db):
     try:
         if os.path.isfile(os.path.join(data_path, 'chroma.sqlite3')) and create_db is not True:
-            vector_store = Chroma(persist_directory=data_path, embedding_function=embedding_function)
-            vector_store.persist()
+            vector_store = Chroma(persist_directory=data_path, collection_name=index_name, embedding_function=embedding_function)
         else:
             docstore = documents_loader(data_path, data_types, chunk_size)
             vector_store = Chroma.from_documents(docstore, embedding=embedding_function,
-                                                 persist_directory=data_path)
+                                                 persist_directory=data_path, collection_name=index_name)
     except InvalidDimensionException:
         Chroma().delete_collection()
         os.remove(os.path.join(data_path, 'chroma.sqlite3'))
