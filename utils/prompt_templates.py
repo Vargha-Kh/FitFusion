@@ -35,6 +35,8 @@ Critique the plan based on the following factors:
 - Are the meal ingredients mentioned and are they feasible?
 - Does the plan meet any stated medical constraints or preferences?
 - Are there any missing details or superfluous information?
+- Are there different meals for each day?
+- Are enough specific detail for meals and their ingredient?
 
 Plan:
 {plan}
