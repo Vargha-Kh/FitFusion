@@ -1,5 +1,4 @@
 import pprint
-from langgraph.types import interrupt
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai.chat_models import ChatOpenAI
 from langgraph.graph import END, StateGraph
