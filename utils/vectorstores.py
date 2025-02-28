@@ -1,3 +1,7 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 import glob
 import os
 from chromadb.errors import InvalidDimensionException
@@ -13,9 +17,7 @@ import weaviate
 from langchain_weaviate.vectorstores import WeaviateVectorStore
 from weaviate.exceptions import WeaviateQueryError
 
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 
 def documents_loader(data_path, data_types, chunk_size):
     """
