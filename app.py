@@ -245,7 +245,7 @@ Feedback Loop: {data_dict["Feedback Loop"]}
             # If you want to stream token-by-token:
             # fit_fusion_agent.print_response(user_input, stream=True)
             # Then read the final content:
-            response = fit_fusion_agent.run(user_input)
+            response = fit_fusion_agent.query_inferences(user_input)
             agent_full_response = response.content
             resp_container.markdown(agent_full_response)
 
