@@ -15,7 +15,8 @@ weaviate_client==4.8.1
 cohere
 langgraph
 nest-asyncio
-chromadb==0.3.29
+streamlit==1.28.1
+chromadb==0.4.17
 langchain-chroma
 pysqlite3-binary
 
