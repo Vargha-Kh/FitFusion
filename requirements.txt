@@ -17,7 +17,7 @@ langgraph
 nest-asyncio
 chromadb
 langchain-chroma
-sqlite3
+pysqlite3-binary
 
 # RabbitMQ connection
 aio-pika==9.4.3
