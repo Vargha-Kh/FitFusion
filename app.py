@@ -250,7 +250,7 @@ Feedback Loop: {data_dict["Feedback Loop"]}
 
         # Finally, append assistant’s response to chat history
         st.session_state["messages"].append(
-            {"role": "assistant", "content": agent_full_response}
+            {"role": "assistant", "content": response}
         )
 
 
