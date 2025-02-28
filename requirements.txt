@@ -16,7 +16,7 @@ cohere
 langgraph
 nest-asyncio
 streamlit==1.28.1
-chromadb==0.4.0
+chromadb==0.4.14
 langchain-chroma
 pysqlite3-binary
 
