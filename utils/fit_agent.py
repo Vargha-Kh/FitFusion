@@ -29,6 +29,7 @@ class FitFusionAgent:
         self.app = None
         self.memory_config = None
         self.llm_model = "gpt-4o-mini"
+        self.llm = ChatOpenAI(model_name=self.llm_model, temperature=0, streaming=True)
         self.output_response = ""
         self.reflection_step = None  # Add a placeholder for the reflection step
 
@@ -71,8 +72,7 @@ class FitFusionAgent:
         )
 
         # Execute the planning LLM
-        llm = ChatOpenAI(model_name=self.llm_model, temperature=0, streaming=True)
-        chain = planning_prompt | llm | StrOutputParser()
+        chain = planning_prompt | self.llm | StrOutputParser()
 
         plan = chain.invoke({"question": question, "documents": documents})
         return {"documents": documents, "question": question, "plan": plan}
@@ -98,8 +98,7 @@ class FitFusionAgent:
         )
 
         # Execute reflection LLM
-        llm = ChatOpenAI(model_name=self.llm_model, temperature=0, streaming=True)
-        chain = reflection_prompt | llm | StrOutputParser()
+        chain = reflection_prompt | self.llm | StrOutputParser()
 
         reflection = chain.invoke({"plan": plan})
         return {"documents": state["documents"], "question": state["question"], "plan": reflection}
@@ -127,8 +126,7 @@ class FitFusionAgent:
             ]
         )
 
-        llm = ChatOpenAI(model_name=self.llm_model, temperature=0, streaming=True)
-        chain = prompt | llm | StrOutputParser()
+        chain = prompt | self.llm | StrOutputParser()
 
         generation = chain.invoke({"question": question, "plan": plan, "documents": documents})
         return {"documents": documents, "question": question, "generation": generation}
