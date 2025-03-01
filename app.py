@@ -337,14 +337,45 @@ def main() -> None:
                     st.session_state["pending_query"] = user_info_text
                     st.success("Data updated!")
 
-
         # Main area: Chat interface
         if "pending_query" in st.session_state and st.session_state["pending_query"] is not None:
+            # Append the user's query to the chat messages
+            st.session_state["messages"].append({"role": "user", "content": "Generate my diet and workout plan."})
+
+            # Save the original query text to filter it out from reasoning logs
+            pending_query_text = st.session_state["pending_query"]
+
+            # List to store each reasoning step (excluding the user info text)
+            steps = []
+
+            # Create an expandable section for reasoning steps with a scrollable container
+            reasoning_expander = st.expander("Reasoning Steps", expanded=True)
+            reasoning_placeholder = reasoning_expander.empty()
+
             with st.spinner("Thinking..."):
-                response = st.session_state["fit_fusion_agent"].query_inferences(st.session_state["pending_query"])
-                st.session_state["messages"].append({"role": "user", "content": "Generate my diet and workout plan."})
-                st.session_state["messages"].append({"role": "assistant", "content": response})
-                st.session_state["pending_query"] = None
+                # query_inferences now returns a generator that yields each reasoning step
+                response_gen = st.session_state["fit_fusion_agent"].query_inferences(pending_query_text)
+                for step in response_gen:
+                    # Skip the user_info_text if it appears in the output
+                    if step.strip() == pending_query_text.strip():
+                        continue
+
+                    steps.append(step)
+                    # Display all reasoning steps except the final answer inside a scrollable container
+                    if len(steps) > 1:
+                        reasoning_text = "\n".join(steps[:-1])
+                    else:
+                        reasoning_text = ""
+                    scrollable_div = (
+                        f'<div style="max-height:300px; overflow-y:auto; padding:10px; border:1px solid #ccc;">'
+                        f'{reasoning_text}</div>'
+                    )
+                    reasoning_placeholder.markdown(scrollable_div, unsafe_allow_html=True)
+
+            # The final answer is the last step (if available)
+            final_answer = steps[-1] if steps else ""
+            st.session_state["messages"].append({"role": "assistant", "content": final_answer})
+            st.session_state["pending_query"] = None
 
         # Display chat messages
         for msg in st.session_state["messages"]:
@@ -362,4 +393,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

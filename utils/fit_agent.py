@@ -154,20 +154,19 @@ class FitFusionAgent:
         self.app.get_state(self.memory_config)
 
 
-    def invoke(self, input_query: str) -> str:
+    def invoke(self, input_query: str):
         """
         Main entry for user queries. We push the user’s message
         into the graph and stream the outputs from each node
         until we reach the end.
         """
         inputs = {"question": input_query}
+        self.output_response = ""
         for output in self.app.stream(inputs, self.memory_config):
             for key, value in output.items():
-                pprint.pprint(f"Output from node '{key}':")
+                # Check if this output includes a reasoning step (plan or generation)
                 if "plan" in value or "generation" in value:
                     output_msg = value.get("plan", value.get("generation"))
-                    pprint.pprint(output_msg)
                     self.output_response += str(output_msg) + "\n"
-                pprint.pprint("\n---\n")
-
-        return self.output_response
+                    # Yield each step immediately
+                    yield str(output_msg)
