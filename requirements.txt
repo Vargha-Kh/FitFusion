@@ -1,3 +1,4 @@
+# Core dependencies
 beautifulsoup4==4.12.3
 fastapi==0.115.0
 langchain==0.3.4
@@ -19,6 +20,24 @@ streamlit==1.28.1
 chromadb==0.4.14
 langchain-chroma
 pysqlite3-binary
+
+# Enhanced UI dependencies
+streamlit-option-menu==0.3.6
+streamlit-aggrid==0.3.4.post3
+streamlit-echarts==0.4.0
+plotly==5.17.0
+altair==5.2.0
+seaborn==0.12.2
+matplotlib==3.8.2
+
+# Data visualization and charts
+plotly-express==0.4.1
+kaleido==0.2.1
+
+# Additional utilities
+python-dateutil==2.8.2
+pandas==2.1.4
+numpy==1.24.3
 
 # RabbitMQ connection
 aio-pika==9.4.3
