@@ -28,7 +28,7 @@ class FitFusionAgent:
         self.retriever = retriever
         self.app = None
         self.memory_config = None
-        self.llm_model = "gpt-4o-mini"
+        self.llm_model = "gpt-4.1-mini"
         self.llm = ChatOpenAI(model_name=self.llm_model, temperature=0, streaming=True)
         self.output_response = ""
         self.reflection_step = None  # Add a placeholder for the reflection step
