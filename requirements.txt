@@ -26,7 +26,7 @@ streamlit-option-menu==0.3.6
 streamlit-aggrid==0.3.4.post3
 streamlit-echarts==0.4.0
 plotly==5.17.0
-altair==5.2.0
+altair==5.5.0
 seaborn==0.12.2
 matplotlib==3.8.2
 
@@ -35,9 +35,12 @@ plotly-express==0.4.1
 kaleido==0.2.1
 
 # Additional utilities
-python-dateutil==2.8.2
-pandas==2.1.4
-numpy==1.24.3
+python-dateutil==2.9.0.post0
+pandas==2.3.2
+numpy>=1.26.2,<2.0.0
 
 # RabbitMQ connection
 aio-pika==9.4.3
+
+# Fix version conflicts
+rich>=10.14.0,<14
